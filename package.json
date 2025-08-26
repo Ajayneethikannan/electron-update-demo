@@ -5,14 +5,48 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dev": "NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder --win --mac --linux",
+    "publish": "electron-builder --publish=always",
+    "publish:win": "electron-builder --win --publish=always",
+    "publish:mac": "electron-builder --mac --publish=always",
+    "publish:linux": "electron-builder --linux --publish=always",
+    "draft": "electron-builder --publish=onTagOrDraft",
+    "prerelease": "electron-builder --publish=always --prerelease",
+    "publish:script": "./scripts/publish.sh"
   },
   "devDependencies": {
     "electron": "^37.3.1",
-    "electron-builder": "^26.0.12",
-    "electron-debug": "^4.1.0"
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
+    "electron-log": "^5.4.3",
     "electron-updater": "^6.6.2"
+  },
+  "repository": "https://github.com/Ajayneethikannan/electron-update-demo",
+  "publish": {
+    "provider": "github",
+    "owner": "Ajayneethikannan",
+    "repo": "electron-update-demo"
+  },
+  "build": {
+    "appId": "com.electron.app",
+    "productName": "Electron App",
+    "copyright": "Copyright © 2025",
+    "generateUpdatesFilesForAllChannels": true,
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "default"
+    },
+    "nsis": {
+      "differentialPackage": true
+    }
   }
 }
